@@ -7,7 +7,21 @@ import { MultiPortalsService } from './multi-portals.service';
   selector: '[namedPortal]',
 })
 export class NamedPortalOutlet extends CdkPortalOutlet implements OnInit, OnDestroy {
-  @Input() public namedPortal!: string;
+  @Input()
+  public set namedPortal(name: string | undefined | null) {
+    if (!!name && !!this._namedPortal && name !== this.namedPortal) {
+      this.destroy()
+    }
+
+    if (!!name) {
+      this._namedPortal = name;
+      this.register();
+    }
+  }
+  public get namedPortal(): string | undefined | null {
+    return this._namedPortal;
+  }
+  private _namedPortal!: string;
 
   constructor(
     public viewContainerRef: ViewContainerRef,
@@ -15,12 +29,6 @@ export class NamedPortalOutlet extends CdkPortalOutlet implements OnInit, OnDest
     private multiPortalsService: MultiPortalsService,
   ) {
     super(componentFactoryResolver, viewContainerRef);
-
-  }
-
-  public override ngOnInit(): void {
-    super.ngOnInit();
-    this.register();
   }
 
   public override ngOnDestroy() {
@@ -29,10 +37,10 @@ export class NamedPortalOutlet extends CdkPortalOutlet implements OnInit, OnDest
   }
 
   private register(): void {
-    this.multiPortalsService.registerOutlet(this.namedPortal, this);
+    this.multiPortalsService.registerOutlet(this._namedPortal, this);
   }
 
   private destroy(): void {
-    this.multiPortalsService.removeOutlet(this.namedPortal);
+    this.multiPortalsService.removeOutlet(this._namedPortal);
   }
 }

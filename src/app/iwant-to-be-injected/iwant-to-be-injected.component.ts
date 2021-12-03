@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, Input, SimpleChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, Input, SimpleChanges, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-iwant-to-be-injected',
@@ -8,6 +8,8 @@ import { Component, ChangeDetectionStrategy, Input, SimpleChanges, ChangeDetecto
 })
 export class IwantToBeInjectedComponent {
   @Input() text: string | undefined;
+
+  @Output() user = new EventEmitter<string>();
 
   constructor(public cdr: ChangeDetectorRef) {}
 

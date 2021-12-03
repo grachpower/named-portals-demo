@@ -1,5 +1,5 @@
 import { ComponentPortal, TemplatePortal } from '@angular/cdk/portal';
-import { ComponentRef, Injectable, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
+import { ComponentRef, Injectable, OnChanges, SimpleChange, SimpleChanges } from '@angular/core';
 import { ComponentPropsToPredefine, CreateComponentPortalParams, CreateComponentPortalResult, CreatePortalParams, CreatePortalResult, CreateTemplatePortalParams, CreateTemplatePortalResult } from './multi-portals.types';
 import { NamedPortalOutlet } from './portal-outlet.directive';
 

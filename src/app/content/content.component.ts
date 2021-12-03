@@ -17,11 +17,13 @@ export class ContentComponent implements OnInit, AfterViewInit {
     private cdr: ChangeDetectorRef,
   ) { }
 
-  ngOnInit() {}
-
-  ngAfterViewInit(): void {
+  ngOnInit() {
     this.injectComponent();
     this.injectTemplate();
+  }
+
+  ngAfterViewInit(): void {
+    
   }
 
   injectComponent(): void {
@@ -33,8 +35,9 @@ export class ContentComponent implements OnInit, AfterViewInit {
 
     setTimeout(() => {
       result.componentRef.instance.text = `i'm changed text im component`;
-      result.componentRef.changeDetectorRef.detectChanges();
       result.componentRef.instance.cdr.markForCheck();
+
+      result.componentRef.instance.user.subscribe();
       console.log('Do it');
     }, 2000);
   }
